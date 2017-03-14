@@ -1,1 +1,5 @@
-/* Empty. Add your own CSS if you like */
+
+.img-big-thumbnail {
+  width: 90%;
+  margin: 10px;
+}

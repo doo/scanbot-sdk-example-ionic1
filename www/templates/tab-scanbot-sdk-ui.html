@@ -1,0 +1,15 @@
+<ion-view view-title="Scanbot SDK UI">
+  <ion-content padding="true">
+
+    <button class="button button-block button-positive" ng-click="startCameraUi()">
+      <i class="icon ion-ios-camera"></i> Scanbot Camera UI
+    </button>
+
+    <button class="button button-block button-positive" ng-if="currentDocumentImage.originalImageFileUri" ng-click="startCroppingUi()">
+      <i class="icon ion-ios-crop-strong"></i> Scanbot Cropping UI
+    </button>
+
+    <img ng-if="currentDocumentImage.imageFileUri" src="{{currentDocumentImage.imageFileUri}}" class="img-big-thumbnail padding">
+
+  </ion-content>
+</ion-view>

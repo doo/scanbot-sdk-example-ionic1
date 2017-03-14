@@ -20,6 +20,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+
+    // Initialize Scanbot SDK:
+    var options = { loggingEnabled: true, licenseKey: '' };
+    window.ScanbotSdk.initializeSdk(function(result) {
+        console.log(result);
+      },
+      function(error) {
+        console.log('Error from Scanbot SDK: ' + error);
+      },
+      options
+    );
+
   });
 })
 
@@ -77,7 +90,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'AccountCtrl'
       }
     }
+  })
+
+  .state('tab.scanbot-sdk-ui', {
+    url: '/scanbot-sdk-ui',
+    views: {
+      'tab-scanbot-sdk-ui': {
+        templateUrl: 'templates/tab-scanbot-sdk-ui.html',
+        controller: 'ScanbotSdkUiCtrl'
+      }
+    }
   });
+
+  ;
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');

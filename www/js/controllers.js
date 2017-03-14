@@ -25,4 +25,48 @@ angular.module('starter.controllers', [])
   $scope.settings = {
     enableFriends: true
   };
-});
+})
+
+
+// Scanbot SDK Plugin Example Controllers
+.controller('ScanbotSdkUiCtrl', function($scope) {
+  // TODO move currentDocumentImage into Service so we have a global instance to use in each tab....
+  $scope.currentDocumentImage = { imageFileUri: '', originalImageFileUri: '' };
+
+  $scope.startCameraUi = function() {
+    var options = { edgeColor: '#0000ff' };
+    window.ScanbotSdkUi.startCamera(callbackCameraUi, callbackError, options);
+  };
+
+  var callbackCameraUi = function(result) {
+    $scope.$apply(function() {
+      $scope.currentDocumentImage.imageFileUri = result.imageFileUri;
+      $scope.currentDocumentImage.originalImageFileUri = result.originalImageFileUri;
+    });
+  };
+
+  $scope.startCroppingUi = function() {
+    var options = {
+      imageFileUri: $scope.currentDocumentImage.originalImageFileUri,
+      edgeColor: '#0000ff'
+    };
+    window.ScanbotSdkUi.startCropping(callbackCroppingUi, callbackError, options);
+  };
+
+  var callbackCroppingUi = function(result) {
+    $scope.$apply(function() {
+      $scope.currentDocumentImage.imageFileUri = result.imageFileUri;
+    });
+  };
+
+  var callbackError = function(error) {
+    console.log('Error from Scanbot SDK Plugin: ' + error);
+  };
+
+})
+
+.controller('ScanbotSdkCtrl', function($scope) {
+  // TODO
+})
+
+;
