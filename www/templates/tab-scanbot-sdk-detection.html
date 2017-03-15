@@ -1,0 +1,21 @@
+<ion-view view-title="Scanbot SDK - Document Detection">
+  <ion-content padding="true">
+
+    <button class="button button-block button-positive" ng-click="openPhotoLibrary()">
+      <i class="icon ion-images"></i> Select Image from Photo Library
+    </button>
+
+    <button ng-if="imageFileUri" class="button button-block button-positive" ng-click="documentDetection()">
+      <i class="icon ion-ios-photos"></i> Document Detection
+    </button>
+
+    <img ng-if="imageFileUri" src="{{imageFileUri}}" class="img-big-thumbnail padding">
+
+    <div ng-if="detectionResult">
+      <p>Detection Result:</p>
+      <code>{{detectionResult}}</code>
+    </div>
+
+
+  </ion-content>
+</ion-view>

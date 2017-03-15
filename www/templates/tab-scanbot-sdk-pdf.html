@@ -1,0 +1,19 @@
+<ion-view view-title="Scanbot SDK - PDF Creation">
+  <ion-content padding="true">
+
+    <button class="button button-block button-positive" ng-click="openPhotoLibrary()">
+      <i class="icon ion-plus"></i> Add Image
+    </button>
+
+    <p>Add images from Photo Library to create PDF file.</p>
+
+    <div>
+      <img ng-repeat="imgUri in images" src="{{imgUri}}" class="img-small-thumbnail">
+    </div>
+
+    <button ng-if="images.length > 0" class="button button-block button-positive" ng-click="createPdf()">
+      <i class="icon ion-document-text"></i> Create PDF
+    </button>
+
+  </ion-content>
+</ion-view>

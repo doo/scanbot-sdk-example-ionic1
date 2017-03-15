@@ -73,6 +73,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
+  .state('tab.scanbot-sdk-detection', {
+    url: '/scanbot-sdk-detection',
+    views: {
+      'tab-scanbot-sdk-detection': {
+        templateUrl: 'templates/tab-scanbot-sdk-detection.html',
+        controller: 'ScanbotSdkDetectionCtrl'
+      }
+    }
+  })
+
+  .state('tab.scanbot-sdk-pdf', {
+    url: '/scanbot-sdk-pdf',
+    views: {
+      'tab-scanbot-sdk-pdf': {
+        templateUrl: 'templates/tab-scanbot-sdk-pdf.html',
+        controller: 'ScanbotSdkPdfCtrl'
+      }
+    }
+  })
+
   ;
 
   // if none of the above states are matched, use this as the fallback

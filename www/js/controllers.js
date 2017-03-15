@@ -27,7 +27,6 @@ angular.module('starter.controllers', [])
 
   var callbackCroppingUi = function(result) {
     $scope.$apply(function() {
-      //$scope.currentDocumentImage.imageFileUri = result.imageFileUri;
       DemoImageStorage.setCurrentDocumentImage(result);
     });
   };
@@ -79,7 +78,58 @@ angular.module('starter.controllers', [])
   var callbackError = function(error) {
     console.log('Error from Scanbot SDK Plugin: ' + error);
   };
+})
 
+.controller('ScanbotSdkDetectionCtrl', function($scope, PhotoLibrary) {
+  $scope.imageFileUri = '';
+  $scope.detectionResult = '';
+
+  $scope.openPhotoLibrary = function() {
+    PhotoLibrary.getPicture().then(function(result) {
+      $scope.imageFileUri = result;
+    });
+  };
+
+  $scope.documentDetection = function() {
+    var options = { imageFileUri: $scope.imageFileUri };
+    window.ScanbotSdk.documentDetection(callbackdocumentDetection, callbackError, options);
+  };
+
+  var callbackdocumentDetection = function(result) {
+    $scope.$apply(function() {
+      $scope.imageFileUri = result.imageFileUri;
+      $scope.detectionResult = JSON.stringify(result);
+    });
+  };
+
+  var callbackError = function(error) {
+    console.log('Error from Scanbot SDK Plugin: ' + error);
+  };
+})
+
+.controller('ScanbotSdkPdfCtrl', function($scope, PhotoLibrary) {
+  $scope.images = [];
+
+  $scope.openPhotoLibrary = function() {
+    PhotoLibrary.getPicture().then(function(result) {
+      if ($scope.images.indexOf(result) == -1) {
+        $scope.images.push(result);
+      }
+    });
+  };
+
+  $scope.createPdf = function() {
+    var options = { images: $scope.images };
+    window.ScanbotSdk.createPdf(callbackCreatePdf, callbackError, options);
+  };
+
+  var callbackCreatePdf = function(result) {
+    alert('PDF file created: ' + result.pdfFileUri);
+  };
+
+  var callbackError = function(error) {
+    console.log('Error from Scanbot SDK Plugin: ' + error);
+  };
 })
 
 ;

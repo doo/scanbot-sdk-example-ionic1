@@ -25,4 +25,31 @@ angular.module('starter.services', [])
   };
 })
 
+.factory('PhotoLibrary', function($q) {
+  // we use cordova-plugin-camera to get images from photo library
+  return {
+    getPicture: function() {
+      var q = $q.defer();
+
+      var options = {
+        quality: 95,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+      };
+
+      navigator.camera.getPicture(
+        function(result) {
+          q.resolve(result);
+        },
+        function(err) {
+          q.reject(err);
+        },
+        options
+      );
+
+      return q.promise;
+    }
+  };
+})
+
 ;
