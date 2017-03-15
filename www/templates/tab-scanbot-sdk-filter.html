@@ -1,0 +1,28 @@
+<ion-view view-title="Scanbot SDK Filter">
+  <ion-content padding="true">
+
+    <div class="list">
+      <label class="item item-input item-select" for="imageFilterSelect">
+        <div class="input-label">
+          Select image filter:
+        </div>
+        <select name="imageFilterSelect" id="imageFilterSelect"
+                ng-options="option.name for option in availableImageFilter track by option.id"
+                ng-model="selectedImageFilter"
+                ng-change="selectFilter(selectedImageFilter)">
+        </select>
+      </label>
+    </div>
+
+    <div ng-if="!currentDocumentImage.imageFileUri">
+      <p>To test the image filter functionality please snap a document image via Scanbot Camera UI.</p>
+    </div>
+
+    <button ng-if="currentDocumentImage.imageFileUri && selectedImageFilter" class="button button-block button-positive" ng-click="applyImageFilter()">
+      <i class="icon ion-ios-color-filter"></i> Apply Image Filter
+    </button>
+
+    <img ng-if="filteredImageFileUri" src="{{filteredImageFileUri}}" class="img-big-thumbnail padding">
+
+  </ion-content>
+</ion-view>

@@ -1,37 +1,10 @@
+
 angular.module('starter.controllers', [])
-
-.controller('DashCtrl', function($scope) {})
-
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-})
 
 
 // Scanbot SDK Plugin Example Controllers
-.controller('ScanbotSdkUiCtrl', function($scope) {
-  // TODO move currentDocumentImage into Service so we have a global instance to use in each tab....
-  $scope.currentDocumentImage = { imageFileUri: '', originalImageFileUri: '' };
+.controller('ScanbotSdkUiCtrl', function($scope, DemoImageStorage) {
+  $scope.currentDocumentImage = DemoImageStorage.currentDocumentImage;
 
   $scope.startCameraUi = function() {
     var options = { edgeColor: '#0000ff' };
@@ -40,8 +13,7 @@ angular.module('starter.controllers', [])
 
   var callbackCameraUi = function(result) {
     $scope.$apply(function() {
-      $scope.currentDocumentImage.imageFileUri = result.imageFileUri;
-      $scope.currentDocumentImage.originalImageFileUri = result.originalImageFileUri;
+      DemoImageStorage.setCurrentDocumentImage(result);
     });
   };
 
@@ -55,7 +27,8 @@ angular.module('starter.controllers', [])
 
   var callbackCroppingUi = function(result) {
     $scope.$apply(function() {
-      $scope.currentDocumentImage.imageFileUri = result.imageFileUri;
+      //$scope.currentDocumentImage.imageFileUri = result.imageFileUri;
+      DemoImageStorage.setCurrentDocumentImage(result);
     });
   };
 
@@ -65,8 +38,48 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ScanbotSdkCtrl', function($scope) {
-  // TODO
+.controller('ScanbotSdkFilterCtrl', function($scope, DemoImageStorage) {
+  $scope.currentDocumentImage = DemoImageStorage.currentDocumentImage;
+  $scope.filteredImageFileUri = DemoImageStorage.currentDocumentImage.imageFileUri;
+
+  $scope.availableImageFilter = [];
+  $scope.selectedImageFilter = null;
+
+  // init availableImageFilter list:
+  Object.keys(window.ScanbotSdk.ImageFilter).map(function(key) {
+    if (key !== 'NONE') {
+      $scope.availableImageFilter.push({
+        id: key,
+        name: window.ScanbotSdk.ImageFilter[key]
+      });
+    }
+  });
+
+  $scope.selectFilter = function(optionSelected) {
+    $scope.selectedImageFilter = optionSelected;
+  };
+
+  $scope.applyImageFilter = function() {
+    if (!$scope.selectedImageFilter) { return; }
+
+    var options = {
+      imageFileUri: DemoImageStorage.currentDocumentImage.imageFileUri,
+      imageFilter: $scope.selectedImageFilter.name
+    };
+
+    window.ScanbotSdk.applyImageFilter(callbackImageFilter, callbackError, options);
+  };
+
+  var callbackImageFilter = function(result) {
+    $scope.$apply(function() {
+      $scope.filteredImageFileUri = result.imageFileUri;
+    });
+  };
+
+  var callbackError = function(error) {
+    console.log('Error from Scanbot SDK Plugin: ' + error);
+  };
+
 })
 
 ;
