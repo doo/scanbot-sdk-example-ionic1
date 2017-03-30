@@ -7,7 +7,10 @@ angular.module('starter.controllers', [])
   $scope.currentDocumentImage = DemoImageStorage.currentDocumentImage;
 
   $scope.startCameraUi = function() {
-    var options = { edgeColor: '#0000ff' };
+    var options = {
+      edgeColor: '#0000ff',
+      quality: 70
+    };
     window.ScanbotSdkUi.startCamera(callbackCameraUi, callbackError, options);
   };
 
@@ -20,7 +23,8 @@ angular.module('starter.controllers', [])
   $scope.startCroppingUi = function() {
     var options = {
       imageFileUri: $scope.currentDocumentImage.originalImageFileUri,
-      edgeColor: '#0000ff'
+      edgeColor: '#0000ff',
+      quality: 70
     };
     window.ScanbotSdkUi.startCropping(callbackCroppingUi, callbackError, options);
   };
@@ -63,7 +67,8 @@ angular.module('starter.controllers', [])
 
     var options = {
       imageFileUri: DemoImageStorage.currentDocumentImage.imageFileUri,
-      imageFilter: $scope.selectedImageFilter.name
+      imageFilter: $scope.selectedImageFilter.name,
+      quality: 70
     };
 
     window.ScanbotSdk.applyImageFilter(callbackImageFilter, callbackError, options);
@@ -91,7 +96,10 @@ angular.module('starter.controllers', [])
   };
 
   $scope.documentDetection = function() {
-    var options = { imageFileUri: $scope.imageFileUri };
+    var options = {
+      imageFileUri: $scope.imageFileUri,
+      quality: 70
+    };
     window.ScanbotSdk.documentDetection(callbackdocumentDetection, callbackError, options);
   };
 
