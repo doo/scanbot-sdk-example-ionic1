@@ -1,4 +1,6 @@
-# Example App for Scanbot SDK Cordova Plugin with Ionic 1 Framework
+# Barcode, QR code and MRZ detector. Scan documents with OCR
+
+## Scanbot SDK example app for Ionic 1
 
 This example app shows how to integrate the Scanbot SDK Cordova Plugin with [Ionic 1 Framework](https://ionicframework.com). 
 
@@ -10,7 +12,7 @@ The app demonstrates the main features of the plugin. For more details please se
 ## What is Scanbot SDK?
 The Scanbot SDK brings scanning and document creation capabilities to your mobile apps. 
 It contains modules which are individually licensable as license packages. 
-For more details visit our website [https://scanbot.io/sdk.html](https://scanbot.io/sdk.html)
+For more details visit our website https://scanbot.io/sdk
 
 
 ## How to run this app
