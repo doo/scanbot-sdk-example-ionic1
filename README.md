@@ -2,17 +2,19 @@
 
 ## Scanbot SDK example app for Ionic 1
 
-This example app shows how to integrate the Scanbot SDK Cordova Plugin with [Ionic 1 Framework](https://ionicframework.com). 
+This example app shows how to integrate the Scanbot SDK Cordova Plugin with [Ionic Framework v1](https://ionicframework.com). 
 
-The Scanbot SDK Cordova Plugin is available as [npm package](https://www.npmjs.com/package/cordova-plugin-scanbot-sdk).
-
-The app demonstrates the main features of the plugin. For more details please see this [documentation](https://scanbotsdk.github.io/documentation/cordova/).
+**For the latest version of Ionic as well as the latest features of the Scanbot SDK Cordova Plugin please see our [scanbot-sdk-example-ionic](https://github.com/doo/scanbot-sdk-example-ionic) app.**
 
 
 ## What is Scanbot SDK?
 The Scanbot SDK brings scanning and document creation capabilities to your mobile apps. 
 It contains modules which are individually licensable as license packages. 
 For more details visit our website https://scanbot.io/sdk
+
+The Scanbot SDK Cordova Plugin is available as [npm package](https://www.npmjs.com/package/cordova-plugin-scanbot-sdk).
+
+The app demonstrates only a few features of the plugin. For more details please see this [documentation](https://scanbotsdk.github.io/documentation/cordova/).
 
 
 ## How to run this app
